@@ -1,4 +1,5 @@
-from google import google
+# from googlesearch import search
+# from googlesearch.googlesearch import GoogleSearch
 import urllib
 from bs4 import BeautifulSoup
 import requests
@@ -46,16 +47,16 @@ def weatherInfo():
 
 def googleRequest():
     text = input('Enter the phrase: ')
-    # response = requests.get(f'https://www.google.com/search?q={text}')
+    response = requests.get(f'https://www.google.com/search?q={text}')
     # print(response.content)
-    # soup = BeautifulSoup(response.content, features='html.parser')
+    soup = BeautifulSoup(response.content, features='html.parser')
     # print(soup)
     # news_list = soup.findAll('h3')
-    # news_list = soup.select('.LC20lb DKV0Md')
-    # print(news_list)
-    thepage = requests.get(f'https://www.google.com/search?q={text}')
-    soup = BeautifulSoup(thepage, "html.parser")
-    return soup.title.text
+    news_list = soup.select('.BNeawe')
+    print(news_list.text)
+    # thepage = requests.get(f'https://www.google.com/search?q={text}')
+    # soup = BeautifulSoup(thepage, "html.parser")
+    # return soup.title.text
 
 
 googleRequest()
