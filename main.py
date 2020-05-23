@@ -1,6 +1,7 @@
+from google import google
+import urllib
 from bs4 import BeautifulSoup
 import requests
-from google import search
 def learningBot():
     while True:
         with open('bot.txt','a+') as f:
