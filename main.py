@@ -1,8 +1,7 @@
-# from googlesearch import search
-# from googlesearch.googlesearch import GoogleSearch
 import urllib
 from bs4 import BeautifulSoup
 import requests
+import  json
 def learningBot():
     while True:
         with open('bot.txt','a+') as f:
@@ -43,20 +42,32 @@ def exchange():
 def weatherInfo():
     response = requests.get('https://api.openweathermap.org/data/2.5/weather?q=Baku&appid=61389a93f65b06e891a9fac33362e797')
     response_dict = response.json()
-    print(response_dict)
+    for x in response_dict:
+        print(x,response_dict[x])
 
 def googleRequest():
     text = input('Enter the phrase: ')
     response = requests.get(f'https://www.google.com/search?q={text}')
-    # print(response.content)
-    soup = BeautifulSoup(response.content, features='html.parser')
-    # print(soup)
-    # news_list = soup.findAll('h3')
-    news_list = soup.select('.BNeawe')
-    print(news_list.text)
-    # thepage = requests.get(f'https://www.google.com/search?q={text}')
-    # soup = BeautifulSoup(thepage, "html.parser")
-    # return soup.title.text
+    soup = BeautifulSoup(response.text,features = 'html.parser')
+    title = soup.select('.vvjwJb')
+    links = soup.select('.UPmit')
+    for x in range(len(title)):
+        print(title[x].text,links[x].text.split('›')[0])
 
 
-googleRequest()
+while True:
+    answer = input("Lets start talking. What do you want to do? You can choice one of this:\n 1 Talk with me \n 2 Get last news \n 3 Get info about currency \n 4 Get info about weather \n 5 Get searching results from Google \n Type exit if you want quit\n")
+    if int(answer) == 1:
+        learningBot()
+    elif int(answer) == 2:
+        news()
+    elif int(answer) == 3:
+        exchange()
+    elif int(answer) == 4:
+        weatherInfo()
+    elif int(answer) == 5:
+        googleRequest()
+    elif answer == 'exit':
+        exit()
+    else:
+        print('Type only one this numbers please!')
