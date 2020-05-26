@@ -56,9 +56,13 @@ def googleRequest():
 
 
 while True:
-    answer = input("Lets start talking. What do you want to do? You can choice one of this:\n 1 Talk with me \n 2 Get last news \n 3 Get info about currency \n 4 Get info about weather \n 5 Get searching results from Google \n Type exit if you want quit\n")
-    if int(answer) == 1:
-        learningBot()
+    l = ['1','2','3','4','5','exit']
+    answer = input("\nLets start talking. What do you want to do? You can choice one of this:\n 1 Talk with me \n 2 Get last news \n 3 Get info about currency \n 4 Get info about weather \n 5 Get searching results from Google \n Type exit if you want quit\n")
+    if answer not in l:
+        print('Type only number between 1-5 or exit!')
+        continue
+    elif answer == 'exit':
+        exit()
     elif int(answer) == 2:
         news()
     elif int(answer) == 3:
@@ -67,7 +71,7 @@ while True:
         weatherInfo()
     elif int(answer) == 5:
         googleRequest()
-    elif answer == 'exit':
-        exit()
+    elif int(answer) == 1:
+        learningBot()
     else:
         print('Type only one this numbers please!')
